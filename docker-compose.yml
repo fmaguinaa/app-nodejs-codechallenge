@@ -1,12 +1,43 @@
 version: "3.7"
 services:
+  api-gateway:
+    build:
+      context: ./api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - transaction-microservice
+      - anti-fraud-microservice
+
+  transaction-microservice:
+    build:
+      context: ./transaction-microservice
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/yape"
+    depends_on:
+      - postgres
+
+  anti-fraud-microservice:
+    build:
+      context: ./anti-fraud-microservice
+    ports:
+      - "3002:3002"
+
   postgres:
     image: postgres:14
+    container_name: transactions-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: yape
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.3
     environment:

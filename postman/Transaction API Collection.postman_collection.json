@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "c3edf5fa-0496-443e-9c87-63c8df892e48",
+		"name": "Transaction API Collection",
+		"description": "Collection for testing Transaction API CRUD operations.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14909264"
+	},
+	"item": [
+		{
+			"name": "Create Transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountExternalIdDebit\": \"d1234567-89ab-cdef-0123-456789abcdef\",\n  \"accountExternalIdCredit\": \"c1234567-89ab-cdef-0123-456789abcdef\",\n  \"transferTypeId\": 1,\n  \"value\": 100.50\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/transactions/{{transactionExternalId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"{{transactionExternalId}}"
+					]
+				},
+				"description": "Replace `{{transactionExternalId}}` with the actual transactionExternalId."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Transaction Status",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"transactionStatusId\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions/{{transactionExternalId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"{{transactionExternalId}}"
+					]
+				},
+				"description": "Replace `{{transactionExternalId}}` with the actual transactionExternalId."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Transaction",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/transactions/{{transactionExternalId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"{{transactionExternalId}}"
+					]
+				},
+				"description": "Replace `{{transactionExternalId}}` with the actual transactionExternalId."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "transactionExternalId",
+			"value": ""
+		}
+	]
+}
