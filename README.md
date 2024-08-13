@@ -69,6 +69,23 @@ You must have two resources:
 }
 ```
 
+## Solution
+
+Launch locally the application with docker:
+
+Technologies to solve the challenges:
+- nestjs
+- prisma
+- kafka
+- swagger
+
+```shell
+docker compose up --build
+docker compose exec transaction-microservice npx ts-node prisma/seed.ts
+```
+
+
+
 ## Optional
 
 You can use any approach to store transaction data but you should consider that we may deal with high volume scenarios where we have a huge amount of writes and reads for the same data at the same time. How would you tackle this requirement?
